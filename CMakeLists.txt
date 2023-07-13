@@ -33,11 +33,6 @@ if(NOT MPFR_FOUND)
     message(FATAL_ERROR "Could not find MPFR!")
 endif()
 
-find_package(GMP REQUIRED)
-if(NOT GMP_FOUND)
-    message(FATAL_ERROR "Could not find GMP!")
-endif()
-
 include_directories(
     ${CMAKE_SOURCE_DIR}/src/lib
     ${GMP_INCLUDES}

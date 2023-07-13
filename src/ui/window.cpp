@@ -7,7 +7,6 @@
 #include <QInputDialog>
 #include <QLabel>
 
-//TODO: Show center coordinates and scale in the status bar
 Window::Window(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Window),

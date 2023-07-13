@@ -17,6 +17,13 @@ public:
 
     int getMaxIterations() const noexcept;
     double getColorIntensity() const noexcept;
+    double getScale() const noexcept;
+
+    double getCenterX() const noexcept;
+    double getCenterY() const noexcept;
+
+Q_SIGNALS:
+    void displayUpdated();
 
 public Q_SLOTS:
     void setColorStrategySmooth(bool enable);

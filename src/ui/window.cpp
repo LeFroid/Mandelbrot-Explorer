@@ -5,11 +5,14 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QInputDialog>
+#include <QLabel>
 
+//TODO: Show center coordinates and scale in the status bar
 Window::Window(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Window),
-    m_actionColorIntensity(nullptr)
+    m_actionColorIntensity(nullptr),
+    m_statusLabel(new QLabel)
 {
     ui->setupUi(this);
 
@@ -44,6 +47,12 @@ Window::Window(QWidget *parent) :
     connect(ui->actionSin_Wave,   &QAction::toggled, ui->mandelbrotWidget, &MandelbrotView::setColorStrategyWave);
 
     connect(ui->actionIteration_Count, &QAction::triggered, this, &Window::openIterationDialog);
+
+    m_statusLabel->setAlignment(Qt::AlignRight);
+    ui->statusBar->addWidget(m_statusLabel, 1);
+    connect(ui->mandelbrotWidget, &MandelbrotView::displayUpdated, this, &Window::updateStatusBar);
+
+    updateStatusBar();
 }
 
 Window::~Window()
@@ -52,6 +61,8 @@ Window::~Window()
         m_actionColorIntensity->deleteLater();
 
     delete ui;
+
+    delete m_statusLabel;
 }
 
 void Window::openSaveDialog()
@@ -98,4 +109,13 @@ void Window::setupSmoothColorSpecificAction()
 {
     m_actionColorIntensity = ui->menuEdit->addAction(tr("Color Intensity"));
     connect(m_actionColorIntensity, &QAction::triggered, this, &Window::openColorIntensityDialog);
+}
+
+void Window::updateStatusBar()
+{
+    m_statusLabel->setText(QString("Iterations: %1 | Scale: %2 | Center: (%3, %4)")
+        .arg(ui->mandelbrotWidget->getMaxIterations())
+        .arg(ui->mandelbrotWidget->getScale())
+        .arg(ui->mandelbrotWidget->getCenterX())
+        .arg(ui->mandelbrotWidget->getCenterY()));
 }

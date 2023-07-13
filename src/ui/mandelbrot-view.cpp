@@ -52,6 +52,21 @@ double MandelbrotView::getColorIntensity() const noexcept
     return m_colorIntensity;
 }
 
+double MandelbrotView::getScale() const noexcept
+{
+    return m_scale;
+}
+
+double MandelbrotView::getCenterX() const noexcept
+{
+    return m_centerX;
+}
+
+double MandelbrotView::getCenterY() const noexcept
+{
+    return m_centerY;
+}
+
 void MandelbrotView::saveToFile(const QString &fileName, int colorStrategy)
 {
     if (!m_pixmap.save(fileName))
@@ -122,6 +137,8 @@ void MandelbrotView::onImageCreated(const QImage &image, double scale)
     m_pixmapScale = scale;
     m_dragOffset = QPoint();
     update();
+
+    Q_EMIT displayUpdated();
 }
 
 void MandelbrotView::scrollImage(int dx, int dy)

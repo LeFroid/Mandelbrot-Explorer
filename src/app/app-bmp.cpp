@@ -57,9 +57,6 @@ void printHelp(const std::string &appName, const std::vector<Argument> &argTable
 
 std::vector<Argument> &parseArgs(int argc, char **argv, std::vector<Argument> &argTable)
 {
-    if (argc <= 1)
-        return argTable;
-
     const std::string shortHelpFlag = R"(-h)",
                       longHelpFlag = R"(--help)";
     for (int i = 1; i < argc; ++i)

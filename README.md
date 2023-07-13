@@ -27,7 +27,6 @@ $ make
 *   Modern C++ compiler, supporting c++17 or greater
 *   CMake version 3.1.0 or greater
 *   Qt version 5.9.0 or greater for the GUI
-*   GMP
 *   MPFR
 
 
